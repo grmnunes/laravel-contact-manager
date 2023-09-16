@@ -57,7 +57,14 @@ class ContactController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $contact = $this->contactService->findById($id);
+
+        if (!$contact) {
+
+            return redirect()->back();
+        }
+
+        return view('admin.contacts.show', compact('contact'));
     }
 
     /**
@@ -87,7 +94,7 @@ class ContactController extends Controller
 
         } catch (Exception $e) {
 
-            return redirect()->back()->with('error', 'There was an error when trying to register. Try again.');
+            return redirect()->back()->with('error', 'There was an error when trying to update. Try again.');
         }
     }
 
@@ -96,7 +103,16 @@ class ContactController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+
+            $this->contactService->delete($id);
+
+            return redirect()->route('contacts.index');
+
+        } catch (Exception $e) {
+
+            return redirect()->back()->with('error', 'There was an error when trying to remove. Try again.');
+        }
     }
 
     public function list()
