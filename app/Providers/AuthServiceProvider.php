@@ -27,7 +27,6 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('is_guest_user', function($user) {
-
             return auth()->guest();
         });
     }

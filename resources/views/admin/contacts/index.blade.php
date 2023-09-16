@@ -50,7 +50,10 @@
                                     </a>
                                     <a
                                         href="{{ route('contacts.destroy', $item->id) }}"
-                                        class="text-danger btn-link m-2"
+                                        class="text-danger btn-link m-2 button-destroy"
+                                        data-toggle="modal"
+                                        data-target="#modal-destroy"
+                                        data-name="{{ $item->name }}"
                                         >
                                         <i class="fas fa-trash"></i> Remove
                                     </a>
@@ -62,6 +65,32 @@
             </div>
         @endif
     </div>
+
+    <div class="modal" tabindex="-1" role="dialog" id="modal-destroy">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Do you really want to delete the contact?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body"><strong>Name:</strong> <p id="contact-name"></p></div>
+                <div class="modal-footer">
+                    <form action="" id="contact-destroy" method="POST">
+                        @method('DELETE')
+                        @csrf
+                        <button type="submit" class="btn btn-danger">
+                            <i class="fas fa-trash"></i> Remove
+                        </button>
+                    </form>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 @stop
 
 @section('css')
@@ -87,6 +116,14 @@
                 "columnDefs": [
                     { "orderable": false, "targets": [-1] },
                 ],
+            });
+
+            $('.button-destroy').on('click', function () {
+                const contactName = $(this).data('name');
+                const destroyUrl = $(this).attr('href');
+
+                $(document).find('form#contact-destroy').attr('action', destroyUrl);
+                $(document).find('p#contact-name').html(contactName);
             });
         });
     </script>

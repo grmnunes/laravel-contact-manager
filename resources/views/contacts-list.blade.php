@@ -34,7 +34,7 @@
                                 <td>{{ $item->email }}</td>
                                 <td>
                                     <a
-                                        href="{{ route('contacts.show', $item->id) }}"
+                                        href="{{ route('guest.contact.show', $item->id) }}"
                                         class="text-secondary btn-link m-2"
                                         >
                                         <i class="fas fa-eye"></i></i> Show

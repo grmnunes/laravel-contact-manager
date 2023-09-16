@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [ContactController::class, 'list'])->name('contacts.list');
+Route::get('/contact/{contact}', [ContactController::class, 'show'])->name('guest.contact.show');
 
 Route::prefix('admin')->middleware('auth')->group(function () {
     Route::resource('contacts', ContactController::class);

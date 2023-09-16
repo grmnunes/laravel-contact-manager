@@ -253,7 +253,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'home',
+    'dashboard_url' => false,
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -311,9 +311,20 @@ return [
         ],
         [
             'text' => 'Contact list',
-            'route'  => 'contacts.index',
             'icon' => 'fas fa-fw fa-users',
-            'can'   => 'is_logged_in'
+            'can'   => 'is_logged_in',
+            'submenu' => [
+                [
+                    'text' => 'Contacts',
+                    'route'  => 'contacts.index',
+                    'icon' => 'fas fa-fw fa-users',
+                ],
+                [
+                    'text' => 'New contact',
+                    'route'  => 'contacts.create',
+                    'icon' => 'fas fa-user-plus',
+                ],
+            ]
         ],
     ],
 
