@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ContactController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,8 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [ContactController::class, 'list'])->name('contacts.list');
+
+Route::prefix('admin')->middleware('auth')->group(function () {
+    Route::resource('contacts', ContactController::class);
 });
 
 Auth::routes(['register' => false]);
