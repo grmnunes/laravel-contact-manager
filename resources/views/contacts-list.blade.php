@@ -30,7 +30,7 @@
                         @foreach ($contacts as $item )
                             <tr>
                                 <td>{{ $item->name }}</td>
-                                <td>{{ $item->contact }}</td>
+                                <td>{{ $item->contact_number }}</td>
                                 <td>{{ $item->email }}</td>
                                 <td>
                                     <a
